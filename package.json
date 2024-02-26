@@ -38,6 +38,6 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "format": "prettier --log-level warn --write \"{src}/**/*.{ts}\""
+    "format": "prettier --write ."
   }
 }
