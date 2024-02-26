@@ -9,7 +9,7 @@ export interface APIOptions {
   forcedMode?: 'real' | 'paper';
   errorHandler?: (
     response: ThreeCommasError,
-    reject: (reason?: any) => void
+    reject: (reason?: any) => void,
   ) => void | Promise<any>;
   apiKeyType: ApiKeyType;
 }

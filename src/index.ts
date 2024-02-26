@@ -19,7 +19,7 @@ import {
   WebsocketCallback,
   Convert,
   Order,
-  ApiKeyType
+  ApiKeyType,
 } from './types';
 import { getSignature } from './lib/crypto';
 
@@ -34,7 +34,7 @@ export class API {
   private readonly SECRETS: string;
   private readonly errorHandler?: (
     response: ThreeCommasError,
-    reject: (reason?: any) => void
+    reject: (reason?: any) => void,
   ) => void | Promise<any>;
   private axios: AxiosInstance;
   private ws?: WebSocket;
@@ -63,27 +63,27 @@ export class API {
 
         const relativeUrl = config.url!.replace(config.baseURL!, '');
         const signature = this.SECRETS
-          ? getSignature({ 
-            apiKeyType: this.KEY_TYPE,
-            payload: `${relativeUrl}?${payload}`, 
-            secret: this.SECRETS
-        })
+          ? getSignature({
+              apiKeyType: this.KEY_TYPE,
+              payload: `${relativeUrl}?${payload}`,
+              secret: this.SECRETS,
+            })
           : '';
 
         const headers: any = {
-            ... config.headers,
-            signature
+          ...config.headers,
+          signature,
         };
         const newConfig = {
           ...config,
-          headers
+          headers,
         };
 
         return newConfig;
       },
       (error) => {
         return Promise.reject(error);
-      }
+      },
     );
   }
 
@@ -91,7 +91,7 @@ export class API {
     method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
     version: 1 | 2,
     path: string,
-    payload?: any
+    payload?: any,
   ): Promise<any> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -161,7 +161,7 @@ export class API {
       'GET',
       1,
       '/accounts/currency_rates_with_leverage_data',
-      params
+      params,
     );
   }
 
@@ -169,7 +169,7 @@ export class API {
     return await this.request(
       'GET',
       1,
-      `/accounts/${account_id}/active_trading_entities`
+      `/accounts/${account_id}/active_trading_entities`,
     );
   }
 
@@ -177,7 +177,7 @@ export class API {
     return await this.request(
       'POST',
       1,
-      `/accounts/${account_id}/sell_all_to_usd`
+      `/accounts/${account_id}/sell_all_to_usd`,
     );
   }
 
@@ -185,7 +185,7 @@ export class API {
     return await this.request(
       'POST',
       1,
-      `/accounts/${account_id}/sell_all_to_btc`
+      `/accounts/${account_id}/sell_all_to_btc`,
     );
   }
 
@@ -194,7 +194,7 @@ export class API {
       'GET',
       1,
       `/accounts/${account_id}/balance_chart_data`,
-      params
+      params,
     );
   }
 
@@ -202,7 +202,7 @@ export class API {
     return await this.request(
       'POST',
       1,
-      `/accounts/${account_id}/load_balances`
+      `/accounts/${account_id}/load_balances`,
     );
   }
 
@@ -220,7 +220,7 @@ export class API {
     return await this.request(
       'POST',
       1,
-      `/accounts/${account_id}/pie_chart_data`
+      `/accounts/${account_id}/pie_chart_data`,
     );
   }
 
@@ -228,7 +228,7 @@ export class API {
     return await this.request(
       'POST',
       1,
-      `/accounts/${account_id}/account_table_data`
+      `/accounts/${account_id}/account_table_data`,
     );
   }
 
@@ -241,7 +241,7 @@ export class API {
       'GET',
       1,
       `/accounts/${account_id}/leverage_data`,
-      { pair }
+      { pair },
     );
   }
 
@@ -250,7 +250,7 @@ export class API {
   }
 
   async getSmartTradeHistory(
-    params?: SmartTradeHistoryParams
+    params?: SmartTradeHistoryParams,
   ): Promise<Order[]> {
     return await this.request('GET', 2, '/smart_trades', params);
   }
@@ -276,7 +276,7 @@ export class API {
       'POST',
       2,
       `/smart_trades/${id}/add_funds`,
-      params
+      params,
     );
   }
 
@@ -285,7 +285,7 @@ export class API {
       'POST',
       2,
       `/smart_trades/${id}/reduce_funds`,
-      params
+      params,
     );
   }
 
@@ -321,7 +321,7 @@ export class API {
     return await this.request(
       'POST',
       2,
-      `/smart_trades/${smartTradeId}/trades/${subTradeId}/close_by_market`
+      `/smart_trades/${smartTradeId}/trades/${subTradeId}/close_by_market`,
     );
   }
 
@@ -329,7 +329,7 @@ export class API {
     return await this.request(
       'DELETE',
       2,
-      `/smart_trades/${smartTradeId}/trades/${subTradeId}`
+      `/smart_trades/${smartTradeId}/trades/${subTradeId}`,
     );
   }
 
@@ -338,7 +338,7 @@ export class API {
       limit: 50,
       sort_by: 'created_at',
       sort_direction: 'desc',
-    }
+    },
   ) {
     return await this.request('GET', 1, '/bots', params);
   }
@@ -356,7 +356,7 @@ export class API {
       limit: 50,
       order: 'created_at',
       order_direction: 'desc',
-    }
+    },
   ) {
     return await this.request('GET', 1, '/deals', params);
   }
@@ -373,7 +373,7 @@ export class API {
     method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
     version: 1 | 2,
     path: string,
-    payload?: any
+    payload?: any,
   ) {
     return await this.request(method, version, path, payload);
   }
@@ -389,8 +389,8 @@ export class API {
           signature: getSignature({
             apiKeyType: this.KEY_TYPE,
             payload: url,
-            secret: this.SECRETS
-        }),
+            secret: this.SECRETS,
+          }),
         },
       ],
     };
@@ -401,7 +401,7 @@ export class API {
   private subscribe(
     channel: Channel,
     url: string,
-    callback?: WebsocketCallback
+    callback?: WebsocketCallback,
   ) {
     const payload = JSON.stringify({
       identifier: this.buildIdentifier(channel, url),

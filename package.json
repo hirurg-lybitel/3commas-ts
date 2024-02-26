@@ -1,5 +1,20 @@
 {
   "name": "3commas-ts",
+  "version": "1.0.0",
+  "description": "3Commas api wrapper for two type of api keys",
+  "private": false,
+  "author": "Hirurg-lybitel",
+  "license": "MIT",
+  "keywords": ["3Commas", "api", "wrapper", "typescript", "3Commas-ts"],
+  "main": "dist/index.js",
+  "homepage": "https://github.com/hirurg-lybitel/3commas-ts#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hirurg-lybitel/3commas-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hirurg-lybitel/3commas-ts/issues"
+  },
   "packageManager": "yarn@3.4.1",
   "dependencies": {
     "@types/node": "^20.11.20",
@@ -22,6 +37,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "format": "prettier --log-level warn --write \"{src}/**/*.{ts}\""
   }
 }
