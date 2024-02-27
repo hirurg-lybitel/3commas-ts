@@ -2,7 +2,7 @@
 
 3Commas API provider with Typescript
 
-Offical soucre documentation [here](https://github.com/3commas-io/3commas-official-api-docs#readme).
+Official source documentation [here](https://github.com/3commas-io/3commas-official-api-docs#readme).
 
 ## Install
 ```bash
