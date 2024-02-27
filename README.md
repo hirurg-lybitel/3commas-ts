@@ -1,6 +1,6 @@
 # 3Commas-ts
 
-3Commas API provider with Typescript
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=800&size=32&pause=1000&random=false&&lines=3Commas+API+provider;with+Typescript;" alt="Typing SVG" />
 
 Official source documentation [here](https://github.com/3commas-io/3commas-official-api-docs#readme).
 
