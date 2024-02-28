@@ -65,3 +65,5 @@ subscribeDeal(callback?: (data: WebSocket.Data) => void)
 
 unsubscribe()
 ```
+## Useful
+[3Commas API Swagger](https://app.swaggerhub.com/apis/d_yo_r/3commas_openapidoc.yml/)
