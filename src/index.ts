@@ -54,7 +54,7 @@ export class API {
     });
     this.axios.interceptors.request.use(
       (config) => {
-        let payload = JSON.stringify(config.data);
+        let payload = JSON.stringify(config.data) ?? '';
 
         if (config.method === 'get') {
           payload = qs.stringify(config.params);
