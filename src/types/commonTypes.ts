@@ -1,3 +1,67 @@
+export interface Trade {
+  id: number;
+  average_price: string | null;
+  follow_price_type: 'ask' | 'last';
+  initial_amount: string;
+  initial_total: string | null;
+  order_price: string | null;
+  order_side: 'buy' | 'sell';
+  order_type: 'limit' | 'market';
+  pair: string;
+  position_percentage: string | null;
+  realised_amount: string;
+  realised_total: string | null;
+  status: 'finished' | 'order_placed' | 'to_process';
+  take_profit_percentage: string | null;
+  trade_purpose: 'position' | 'take_profit' | 'stop_loss';
+  trail_percentage: string | null;
+  trail_value: string | null;
+  trailing_enabled: boolean;
+  trailing_last_price: string | null;
+  trailing_last_price_updated_at: string | null;
+  trigger_condition: string | null;
+  trigger_price: string | null;
+  trigger_price_percentage: string | null;
+  trigger_type: 'none' | 'conditional';
+  created_at: string;
+  updated_at: string;
+  realised_percentage: string;
+  initial_price: string;
+  realised_price: string | null;
+  cancelable: boolean;
+  force_processable: boolean;
+}
+
+export interface Asset {
+  currency_code: string;
+  currency_name: string;
+  currency_icon: string;
+  currency_slug: string;
+  percentage: number;
+  position: number;
+  position_available: number;
+  position_type: number;
+  borrowed: number;
+  on_orders: number;
+  on_orders_with_leverage: number;
+  on_orders_long: number;
+  on_orders_short: number;
+  equity: number;
+  current_price: number;
+  current_price_usd: number;
+  day_change_percent: number;
+  day_change_percent_btc: number;
+  day_change_percent_usd: number;
+  btc_value: number;
+  usd_value: number;
+  available_long: number;
+  available_short: number;
+  available_with_leverage_long: number;
+  available_with_leverage_short: number;
+  account_id: number;
+  is_wallet: boolean;
+}
+
 export interface Order {
   id: number;
   version: number;

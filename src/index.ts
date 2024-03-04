@@ -20,6 +20,8 @@ import {
   Convert,
   Order,
   ApiKeyType,
+  Asset,
+  Trade,
 } from './types';
 import { getSignature } from './lib/crypto';
 
@@ -124,39 +126,39 @@ export class API {
     return await this.request('POST', 1, '/accounts/transfer', params);
   }
 
-  async getTransferHistory<T>(params: TransferHistoryParams) {
+  async getTransferHistory<T = any>(params: TransferHistoryParams) {
     return await this.request<T>('GET', 1, '/accounts/transfer_history', params);
   }
 
-  async getTransferData<T>() {
+  async getTransferData<T = any>() {
     return await this.request<T>('GET', 1, '/accounts/transfer_data');
   }
 
-  async addExchangeAccount<T>(params: any) {
+  async addExchangeAccount<T = any>(params: any) {
     return await this.request<T>('POST', 1, '/accounts/new', params);
   }
 
-  async editExchangeAccount<T>(params: any) {
+  async editExchangeAccount<T = any>(params: any) {
     return await this.request<T>('POST', 1, '/accounts/update', params);
   }
 
-  async getExchange<T>() {
+  async getExchange<T = any>() {
     return await this.request<T>('GET', 1, '/accounts');
   }
 
-  async getMarketList<T>() {
+  async getMarketList<T = any>() {
     return await this.request<T>('GET', 1, '/accounts/market_list');
   }
 
-  async getMarketPairs<T>(params?: any) {
+  async getMarketPairs<T = any>(params?: any) {
     return await this.request<T>('GET', 1, '/accounts/market_pairs', params);
   }
 
-  async getCurrencyRate<T>(params: CurrencyParams) {
+  async getCurrencyRate<T = any>(params: CurrencyParams) {
     return await this.request<T>('GET', 1, '/accounts/currency_rates', params);
   }
 
-  async getCurrencyRateWithLeverageData<T>(params: MarketCurrencyParams) {
+  async getCurrencyRateWithLeverageData<T = any>(params: MarketCurrencyParams) {
     return await this.request<T>(
       'GET',
       1,
@@ -165,7 +167,7 @@ export class API {
     );
   }
 
-  async getActiveTradeEntities<T>(account_id: number | string) {
+  async getActiveTradeEntities<T = any>(account_id: number | string) {
     return await this.request<T>(
       'GET',
       1,
@@ -173,7 +175,7 @@ export class API {
     );
   }
 
-  async sellAllToUSD<T>(account_id: number | string) {
+  async sellAllToUSD<T = any>(account_id: number | string) {
     return await this.request<T>(
       'POST',
       1,
@@ -181,7 +183,7 @@ export class API {
     );
   }
 
-  async sellAllToBTC<T>(account_id: number | string) {
+  async sellAllToBTC<T = any>(account_id: number | string) {
     return await this.request<T>(
       'POST',
       1,
@@ -189,7 +191,7 @@ export class API {
     );
   }
 
-  async getBalanceChartData<T>(account_id: number | string, params: any) {
+  async getBalanceChartData<T = any>(account_id: number | string, params: any) {
     return await this.request<T>(
       'GET',
       1,
@@ -198,7 +200,7 @@ export class API {
     );
   }
 
-  async loadBalances<T>(account_id: number | string) {
+  async loadBalances<T = any>(account_id: number | string) {
     return await this.request<T>(
       'POST',
       1,
@@ -206,13 +208,13 @@ export class API {
     );
   }
 
-  async renameExchangeAccount<T>(account_id: number | string, name: string) {
+  async renameExchangeAccount<T = any>(account_id: number | string, name: string) {
     return await this.request<T>('POST', 1, `/accounts/${account_id}/rename`, {
       name,
     });
   }
 
-  async removeExchangeAccount<T>(account_id: number | string) {
+  async removeExchangeAccount<T = any>(account_id: number | string) {
     return await this.request<T>('POST', 1, `/accounts/${account_id}/remove`);
   }
 
@@ -224,7 +226,7 @@ export class API {
     );
   }
 
-  async getAccountTableData<T>(account_id: number | string) {
+  async getAccountTableData<T = Asset[]>(account_id: number | string) {
     return await this.request<T>(
       'POST',
       1,
@@ -232,11 +234,11 @@ export class API {
     );
   }
 
-  async getAccountInfo<T>(account_id?: number) {
+  async getAccountInfo<T = any>(account_id?: number) {
     return await this.request<T>('GET', 1, `/accounts/${account_id ?? 'summary'}`);
   }
 
-  async getLeverageData<T>(account_id: number | string, pair: string) {
+  async getLeverageData<T = any>(account_id: number | string, pair: string) {
     return await this.request<T>(
       'GET',
       1,
@@ -245,7 +247,7 @@ export class API {
     );
   }
 
-  async changeUserMode<T>(mode: 'paper' | 'real') {
+  async changeUserMode<T = any>(mode: 'paper' | 'real') {
     return await this.request<T>('POST', 1, '/users/change_mode', { mode });
   }
 
@@ -272,7 +274,7 @@ export class API {
   }
 
   async averageSmartTrade<T = Order>(id: number, params: FundParams) {
-    return await this.request(
+    return await this.request<T>(
       'POST',
       2,
       `/smart_trades/${id}/add_funds`,
@@ -313,7 +315,7 @@ export class API {
    * @param id smart trade id
    * @returns SmartTrade Order
    */
-  async getSubTrade<T>(id: number) {
+  async getSubTrade<T = Trade[]>(id: number) {
     return await this.request<T>('GET', 2, `/smart_trades/${id}/trades`);
   }
 
@@ -325,7 +327,7 @@ export class API {
     );
   }
 
-  async cancelSubTrade<T>(smartTradeId: number, subTradeId: number) {
+  async cancelSubTrade<T = any>(smartTradeId: number, subTradeId: number) {
     return await this.request<T>(
       'DELETE',
       2,
@@ -333,7 +335,7 @@ export class API {
     );
   }
 
-  async getBots<T>(
+  async getBots<T = any>(
     params: BotsParams = {
       limit: 50,
       sort_by: 'created_at',
@@ -343,15 +345,15 @@ export class API {
     return await this.request<T>('GET', 1, '/bots', params);
   }
 
-  async getBotsStats<T>(params?: BotsStatsParams) {
+  async getBotsStats<T = any>(params?: BotsStatsParams) {
     return await this.request<T>('GET', 1, '/bots/stats', params);
   }
 
-  async getBot<T>(id: number, options?: BotOptionalParams) {
+  async getBot<T = any>(id: number, options?: BotOptionalParams) {
     return await this.request<T>('GET', 1, `/bots/${id}/show`, options);
   }
 
-  async getDeals<T>(
+  async getDeals<T = any>(
     params: DealsParams = {
       limit: 50,
       order: 'created_at',
@@ -361,15 +363,15 @@ export class API {
     return await this.request<T>('GET', 1, '/deals', params);
   }
 
-  async getDeal<T>(id: number) {
+  async getDeal<T = any>(id: number) {
     return await this.request<T>('GET', 1, `/deals/${id}/show`);
   }
 
-  async getDealSafetyOrders<T>(id: number) {
+  async getDealSafetyOrders<T = any>(id: number) {
     return await this.request<T>('GET', 1, `/deals/${id}/market_orders`);
   }
 
-  async customRequest<T>(
+  async customRequest<T = any>(
     method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
     version: 1 | 2,
     path: string,
