@@ -87,12 +87,12 @@ export class API {
     );
   }
 
-  private request(
+  private request<T = any>(
     method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
     version: 1 | 2,
     path: string,
     payload?: any,
-  ): Promise<any> {
+  ): Promise<T> {
     return new Promise(async (resolve, reject) => {
       try {
         const { data } = await this.axios({
@@ -124,40 +124,40 @@ export class API {
     return await this.request('POST', 1, '/accounts/transfer', params);
   }
 
-  async getTransferHistory(params: TransferHistoryParams) {
-    return await this.request('GET', 1, '/accounts/transfer_history', params);
+  async getTransferHistory<T>(params: TransferHistoryParams) {
+    return await this.request<T>('GET', 1, '/accounts/transfer_history', params);
   }
 
-  async getTransferData() {
-    return await this.request('GET', 1, '/accounts/transfer_data');
+  async getTransferData<T>() {
+    return await this.request<T>('GET', 1, '/accounts/transfer_data');
   }
 
-  async addExchangeAccount(params: any) {
-    return await this.request('POST', 1, '/accounts/new', params);
+  async addExchangeAccount<T>(params: any) {
+    return await this.request<T>('POST', 1, '/accounts/new', params);
   }
 
-  async editExchangeAccount(params: any) {
-    return await this.request('POST', 1, '/accounts/update', params);
+  async editExchangeAccount<T>(params: any) {
+    return await this.request<T>('POST', 1, '/accounts/update', params);
   }
 
-  async getExchange() {
-    return await this.request('GET', 1, '/accounts');
+  async getExchange<T>() {
+    return await this.request<T>('GET', 1, '/accounts');
   }
 
-  async getMarketList() {
-    return await this.request('GET', 1, '/accounts/market_list');
+  async getMarketList<T>() {
+    return await this.request<T>('GET', 1, '/accounts/market_list');
   }
 
-  async getMarketPairs(params?: any) {
-    return await this.request('GET', 1, '/accounts/market_pairs', params);
+  async getMarketPairs<T>(params?: any) {
+    return await this.request<T>('GET', 1, '/accounts/market_pairs', params);
   }
 
-  async getCurrencyRate(params: CurrencyParams) {
-    return await this.request('GET', 1, '/accounts/currency_rates', params);
+  async getCurrencyRate<T>(params: CurrencyParams) {
+    return await this.request<T>('GET', 1, '/accounts/currency_rates', params);
   }
 
-  async getCurrencyRateWithLeverageData(params: MarketCurrencyParams) {
-    return await this.request(
+  async getCurrencyRateWithLeverageData<T>(params: MarketCurrencyParams) {
+    return await this.request<T>(
       'GET',
       1,
       '/accounts/currency_rates_with_leverage_data',
@@ -165,32 +165,32 @@ export class API {
     );
   }
 
-  async getActiveTradeEntities(account_id: number | string) {
-    return await this.request(
+  async getActiveTradeEntities<T>(account_id: number | string) {
+    return await this.request<T>(
       'GET',
       1,
       `/accounts/${account_id}/active_trading_entities`,
     );
   }
 
-  async sellAllToUSD(account_id: number | string) {
-    return await this.request(
+  async sellAllToUSD<T>(account_id: number | string) {
+    return await this.request<T>(
       'POST',
       1,
       `/accounts/${account_id}/sell_all_to_usd`,
     );
   }
 
-  async sellAllToBTC(account_id: number | string) {
-    return await this.request(
+  async sellAllToBTC<T>(account_id: number | string) {
+    return await this.request<T>(
       'POST',
       1,
       `/accounts/${account_id}/sell_all_to_btc`,
     );
   }
 
-  async getBalanceChartData(account_id: number | string, params: any) {
-    return await this.request(
+  async getBalanceChartData<T>(account_id: number | string, params: any) {
+    return await this.request<T>(
       'GET',
       1,
       `/accounts/${account_id}/balance_chart_data`,
@@ -198,46 +198,46 @@ export class API {
     );
   }
 
-  async loadBalances(account_id: number | string) {
-    return await this.request(
+  async loadBalances<T>(account_id: number | string) {
+    return await this.request<T>(
       'POST',
       1,
       `/accounts/${account_id}/load_balances`,
     );
   }
 
-  async renameExchangeAccount(account_id: number | string, name: string) {
-    return await this.request('POST', 1, `/accounts/${account_id}/rename`, {
+  async renameExchangeAccount<T>(account_id: number | string, name: string) {
+    return await this.request<T>('POST', 1, `/accounts/${account_id}/rename`, {
       name,
     });
   }
 
-  async removeExchangeAccount(account_id: number | string) {
-    return await this.request('POST', 1, `/accounts/${account_id}/remove`);
+  async removeExchangeAccount<T>(account_id: number | string) {
+    return await this.request<T>('POST', 1, `/accounts/${account_id}/remove`);
   }
 
-  async getPieChartData(account_id: number | string) {
-    return await this.request(
+  async getPieChartData<T>(account_id: number | string) {
+    return await this.request<T>(
       'POST',
       1,
       `/accounts/${account_id}/pie_chart_data`,
     );
   }
 
-  async getAccountTableData(account_id: number | string) {
-    return await this.request(
+  async getAccountTableData<T>(account_id: number | string) {
+    return await this.request<T>(
       'POST',
       1,
       `/accounts/${account_id}/account_table_data`,
     );
   }
 
-  async getAccountInfo(account_id?: number) {
-    return await this.request('GET', 1, `/accounts/${account_id ?? 'summary'}`);
+  async getAccountInfo<T>(account_id?: number) {
+    return await this.request<T>('GET', 1, `/accounts/${account_id ?? 'summary'}`);
   }
 
-  async getLeverageData(account_id: number | string, pair: string) {
-    return await this.request(
+  async getLeverageData<T>(account_id: number | string, pair: string) {
+    return await this.request<T>(
       'GET',
       1,
       `/accounts/${account_id}/leverage_data`,
@@ -245,33 +245,33 @@ export class API {
     );
   }
 
-  async changeUserMode(mode: 'paper' | 'real') {
-    return await this.request('POST', 1, '/users/change_mode', { mode });
+  async changeUserMode<T>(mode: 'paper' | 'real') {
+    return await this.request<T>('POST', 1, '/users/change_mode', { mode });
   }
 
-  async getSmartTradeHistory(
+  async getSmartTradeHistory<T = Order[]>(
     params?: SmartTradeHistoryParams,
-  ): Promise<Order[]> {
-    return await this.request('GET', 2, '/smart_trades', params);
+  ){
+    return await this.request<T>('GET', 2, '/smart_trades', params);
   }
 
-  async smartTrade(params: SmartTradeParams): Promise<Order> {
-    return await this.request('POST', 2, '/smart_trades', params);
+  async smartTrade<T = Order>(params: SmartTradeParams) {
+    return await this.request<T>('POST', 2, '/smart_trades', params);
   }
 
-  async getSmartTrade(id: number): Promise<Order> {
-    return await this.request('GET', 2, `/smart_trades/${id}`);
+  async getSmartTrade<T = Order>(id: number) {
+    return await this.request<T>('GET', 2, `/smart_trades/${id}`);
   }
 
-  async cancelSmartTrade(id: number): Promise<Order> {
-    return await this.request('DELETE', 2, `/smart_trades/${id}`);
+  async cancelSmartTrade<T = Order>(id: number) {
+    return await this.request<T>('DELETE', 2, `/smart_trades/${id}`);
   }
 
-  async updateSmartTrade(id: number, params: any): Promise<Order> {
-    return await this.request('PATCH', 2, `/smart_trades/${id}`, params);
+  async updateSmartTrade<T = Order>(id: number, params: any) {
+    return await this.request<T>('PATCH', 2, `/smart_trades/${id}`, params);
   }
 
-  async averageSmartTrade(id: number, params: FundParams): Promise<Order> {
+  async averageSmartTrade<T = Order>(id: number, params: FundParams) {
     return await this.request(
       'POST',
       2,
@@ -280,8 +280,8 @@ export class API {
     );
   }
 
-  async reduceFund(id: number, params: FundParams): Promise<Order> {
-    return await this.request(
+  async reduceFund<T = Order>(id: number, params: FundParams) {
+    return await this.request<T>(
       'POST',
       2,
       `/smart_trades/${id}/reduce_funds`,
@@ -289,20 +289,20 @@ export class API {
     );
   }
 
-  async closeSmartTrade(id: number): Promise<Order> {
-    return await this.request('POST', 2, `/smart_trades/${id}/close_by_market`);
+  async closeSmartTrade<T = Order>(id: number) {
+    return await this.request<T>('POST', 2, `/smart_trades/${id}/close_by_market`);
   }
 
-  async forceStartSmartTrade(id: number): Promise<Order> {
-    return await this.request('POST', 2, `/smart_trades/${id}/force_start`);
+  async forceStartSmartTrade<T = Order>(id: number) {
+    return await this.request<T>('POST', 2, `/smart_trades/${id}/force_start`);
   }
 
-  async forceProcessSmartTrade(id: number): Promise<Order> {
-    return await this.request('POST', 2, `/smart_trades/${id}/force_process`);
+  async forceProcessSmartTrade<T = Order>(id: number) {
+    return await this.request<T>('POST', 2, `/smart_trades/${id}/force_process`);
   }
 
-  async setNoteSmartTrade(id: number, note: string): Promise<Order> {
-    return await this.request('POST', 2, `/smart_trades/${id}/set_note`, {
+  async setNoteSmartTrade<T = Order>(id: number, note: string) {
+    return await this.request<T>('POST', 2, `/smart_trades/${id}/set_note`, {
       note,
     });
   }
@@ -313,69 +313,69 @@ export class API {
    * @param id smart trade id
    * @returns SmartTrade Order
    */
-  async getSubTrade(id: number) {
-    return await this.request('GET', 2, `/smart_trades/${id}/trades`);
+  async getSubTrade<T>(id: number) {
+    return await this.request<T>('GET', 2, `/smart_trades/${id}/trades`);
   }
 
-  async closeSubTrade(smartTradeId: number, subTradeId: number) {
-    return await this.request(
+  async closeSubTrade<T>(smartTradeId: number, subTradeId: number) {
+    return await this.request<T>(
       'POST',
       2,
       `/smart_trades/${smartTradeId}/trades/${subTradeId}/close_by_market`,
     );
   }
 
-  async cancelSubTrade(smartTradeId: number, subTradeId: number) {
-    return await this.request(
+  async cancelSubTrade<T>(smartTradeId: number, subTradeId: number) {
+    return await this.request<T>(
       'DELETE',
       2,
       `/smart_trades/${smartTradeId}/trades/${subTradeId}`,
     );
   }
 
-  async getBots(
+  async getBots<T>(
     params: BotsParams = {
       limit: 50,
       sort_by: 'created_at',
       sort_direction: 'desc',
     },
   ) {
-    return await this.request('GET', 1, '/bots', params);
+    return await this.request<T>('GET', 1, '/bots', params);
   }
 
-  async getBotsStats(params?: BotsStatsParams) {
-    return await this.request('GET', 1, '/bots/stats', params);
+  async getBotsStats<T>(params?: BotsStatsParams) {
+    return await this.request<T>('GET', 1, '/bots/stats', params);
   }
 
-  async getBot(id: number, options?: BotOptionalParams) {
-    return await this.request('GET', 1, `/bots/${id}/show`, options);
+  async getBot<T>(id: number, options?: BotOptionalParams) {
+    return await this.request<T>('GET', 1, `/bots/${id}/show`, options);
   }
 
-  async getDeals(
+  async getDeals<T>(
     params: DealsParams = {
       limit: 50,
       order: 'created_at',
       order_direction: 'desc',
     },
   ) {
-    return await this.request('GET', 1, '/deals', params);
+    return await this.request<T>('GET', 1, '/deals', params);
   }
 
-  async getDeal(id: number) {
-    return await this.request('GET', 1, `/deals/${id}/show`);
+  async getDeal<T>(id: number) {
+    return await this.request<T>('GET', 1, `/deals/${id}/show`);
   }
 
-  async getDealSafetyOrders(id: number) {
-    return await this.request('GET', 1, `/deals/${id}/market_orders`);
+  async getDealSafetyOrders<T>(id: number) {
+    return await this.request<T>('GET', 1, `/deals/${id}/market_orders`);
   }
 
-  async customRequest(
+  async customRequest<T>(
     method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
     version: 1 | 2,
     path: string,
     payload?: any,
   ) {
-    return await this.request(method, version, path, payload);
+    return await this.request<T>(method, version, path, payload);
   }
 
   // Websocket
