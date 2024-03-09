@@ -22,6 +22,7 @@ import {
   ApiKeyType,
   Asset,
   Trade,
+  Balance,
 } from './types';
 import { getSignature } from './lib/crypto';
 
@@ -218,7 +219,7 @@ export class API {
     return await this.request<T>('POST', 1, `/accounts/${account_id}/remove`);
   }
 
-  async getPieChartData<T = any>(account_id: number | string) {
+  async getPieChartData<T = Balance[]>(account_id: number | string) {
     return await this.request<T>(
       'POST',
       1,

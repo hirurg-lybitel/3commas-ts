@@ -1,3 +1,11 @@
+export interface Balance {
+  date: number;
+  usd: number;
+  btc: number;
+  btc_deposit_amount: number;
+  usd_deposit_amount: number;
+}
+
 export interface Trade {
   id: number;
   average_price: string | null;
